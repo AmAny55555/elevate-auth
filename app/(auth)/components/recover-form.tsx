@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { AuthTopBar } from "./auth-top-bar";
 
 export default function RecoverForm() {
   return (
     <div className="space-y-6">
+      <AuthTopBar />
       <p className="text-3xl font-bold mb-10 text-slate-900">
         Forgot your password?
       </p>
@@ -17,10 +19,9 @@ export default function RecoverForm() {
           bg-transparent
           border-slate-300
           shadow-[0_8px_20px_rgba(15,23,42,0.08)]
-          focus:shadow-[0_12px_24px_-12px_rgba(15,23,42,0.2)]
-          focus:border-slate-500
-          focus:ring-0
-          transition
+      
+       
+      
         "
       />
 

@@ -1,27 +1,19 @@
 "use client";
 
-import { useState } from "react";
-import { AuthCard } from "./components/auth-card";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { AuthTopBar } from "./components/auth-top-bar";
-import LoginForm from "./components/login-form";
-import RegisterForm from "./components/register-form";
 
 export default function AuthPage() {
-  const [view, setView] = useState<"login" | "register">("login");
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push("/login");
+  }, [router]);
 
   return (
-    <div className="w-full">
-      <AuthTopBar
-        onLogin={() => setView("login")}
-        onRegister={() => setView("register")}
-      />
-
-      <AuthCard>
-        {view === "login" && <LoginForm />}
-        {view === "register" && (
-          <RegisterForm onLoginClick={() => setView("login")} />
-        )}
-      </AuthCard>
+    <div className="flex flex-col min-h-screen">
+      <AuthTopBar />
     </div>
   );
 }
