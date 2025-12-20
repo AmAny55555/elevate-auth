@@ -1,6 +1,6 @@
 "use client";
 
-import RecoverForm from "../components/recover-form";
+import RecoverForm from "./_components/recover-form";
 
 export default function Recover() {
   return (

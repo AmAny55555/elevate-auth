@@ -1,6 +1,5 @@
-"use client";
-import { AuthTopBar } from "../components/auth-top-bar";
-import LoginForm from "../components/login-form";
+import { AuthTopBar } from "../_components/auth-top-bar";
+import LoginForm from "./_components/login-form";
 
 export default function LoginPage() {
   return (
