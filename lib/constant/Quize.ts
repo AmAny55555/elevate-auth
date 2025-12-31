@@ -1,9 +1,4 @@
-export interface Quiz {
-  id: string;
-  image: string;
-  title: string;
-  description: string;
-}
+import type { Quiz } from "@/lib/types/quiz";
 
 export const quizzes: Quiz[] = [
   {

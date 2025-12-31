@@ -3,18 +3,23 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { LoginSchema, type LoginFormValues } from "@/lib/schemas/auth.schema";
 
-import { LoginSchema, type LoginFormValues } from "@/lib/schemas/login.schema";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
+
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function LoginForm() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<LoginFormValues>({
+  const form = useForm<LoginFormValues>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
       email: "",
@@ -27,53 +32,63 @@ export default function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-40">
-      <p className="text-3xl font-bold mb-10 text-slate-900">Sign in</p>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 mt-40">
+        <p className="text-3xl font-bold mb-10 text-slate-900">Sign in</p>
 
-      <div>
-        <Input
-          type="email"
-          placeholder="Email"
-          className="h-14 rounded-lg shadow-[0_8px_20px_rgba(15,23,42,0.08)]"
-          {...register("email")}
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input
+                  type="email"
+                  placeholder="Email"
+                  className="h-14 rounded-lg shadow-[0_8px_20px_rgba(15,23,42,0.08)]"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-        {errors.email && (
-          <p className="mt-1 text-sm font-medium text-destructive">
-            {errors.email.message}
-          </p>
-        )}
-      </div>
 
-      <div>
-        <Input
-          type="password"
-          placeholder="Password"
-          className="h-14 rounded-lg shadow-[0_8px_20px_rgba(15,23,42,0.08)]"
-          {...register("password")}
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input
+                  type="password"
+                  placeholder="Password"
+                  className="h-14 rounded-lg shadow-[0_8px_20px_rgba(15,23,42,0.08)]"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-        {errors.password && (
-          <p className="mt-1 text-sm font-medium text-destructive">
-            {errors.password.message}
-          </p>
-        )}
-      </div>
 
-      <div className="text-right">
-        <Link
-          href="/recover"
-          className="text-sm font-medium text-blue-600 hover:underline"
+        <div className="text-right">
+          <Link
+            href="/recover"
+            className="text-sm font-medium text-blue-600 hover:underline"
+          >
+            Recover password?
+          </Link>
+        </div>
+
+        <Button
+          type="submit"
+          disabled={form.formState.isSubmitting}
+          className="w-full h-14 rounded-4xl bg-blue-600 hover:bg-blue-600"
         >
-          Recover password?
-        </Link>
-      </div>
-
-      <Button
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full h-14 rounded-4xl bg-blue-600 hover:bg-blue-600"
-      >
-        {isSubmitting ? "Signing in..." : "Sign in"}
-      </Button>
-    </form>
+          {form.formState.isSubmitting ? "Signing in..." : "Sign in"}
+        </Button>
+      </form>
+    </Form>
   );
 }

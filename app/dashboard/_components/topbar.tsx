@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { Search, Menu } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 interface TopbarProps {
@@ -13,9 +15,17 @@ export default function Topbar({ onMenuToggle }: TopbarProps) {
     <>
       <div className="lg:hidden fixed top-0 left-0 z-50 w-full h-14 bg-blue-600 text-white flex items-center px-3">
         <div className="flex items-center gap-3">
-          <button onClick={onMenuToggle}>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            onClick={onMenuToggle}
+            className="text-white hover:bg-white/10"
+            aria-label="Open menu"
+          >
             <Menu size={22} />
-          </button>
+          </Button>
+
           <Search size={20} />
         </div>
 
