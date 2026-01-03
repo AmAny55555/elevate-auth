@@ -20,13 +20,13 @@ export default function DashboardLayout({
   return (
     <SidebarProvider>
       <div className="min-h-screen bg-[#f3f4f6] w-full overflow-x-hidden">
+        س
         {menuOpen && (
           <div
             className="lg:hidden fixed inset-0 z-40 bg-black/50"
             onClick={() => setMenuOpen(false)}
           />
         )}
-
         <div
           className={cn(
             "lg:hidden fixed top-0 left-0 z-[60] w-full bg-white rounded-b-3xl shadow-xl",
@@ -53,19 +53,17 @@ export default function DashboardLayout({
           </div>
 
           <div className="max-h-[70vh] overflow-y-auto">
-            <Side variant="mobile" onNavigate={() => setMenuOpen(false)} />
+            <Side />
           </div>
         </div>
-
         <div className="max-w-[1440px] mx-auto px-4 lg:px-8">
           <div className="flex gap-6">
             <aside className="hidden lg:block w-72 shrink-0">
-              <Side variant="desktop" />
+              <Side />
             </aside>
 
             <div className="flex flex-col flex-1 min-w-0">
               <Topbar onMenuToggle={() => setMenuOpen((p) => !p)} />
-
               <main className="pt-14 lg:pt-6 flex-1 min-w-0">{children}</main>
             </div>
           </div>
